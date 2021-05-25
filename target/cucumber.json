@@ -1,0 +1,210 @@
+[
+  {
+    "line": 3,
+    "elements": [
+      {
+        "line": 8,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Contexto",
+        "steps": [
+          {
+            "result": {
+              "duration": 2000000,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "que estou acessando a integração com o Trello",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.queEstouAcessandoAIntegraçãoComOTrello()"
+            },
+            "keyword": "Dado "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "informo as informações para autenticação",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.informoAsInformaçõesParaAutenticação()"
+            },
+            "keyword": "Quando "
+          },
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "devo receber o acesso com a validação do Token para meu usuário",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.devoReceberOAcessoComAValidaçãoDoTokenParaMeuUsuário()"
+            },
+            "keyword": "Então "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-05-25T21:27:55.444Z",
+        "line": 14,
+        "name": "Adicionar novo Card",
+        "description": "",
+        "id": "manipulação-de-cards;adicionar-novo-card",
+        "type": "scenario",
+        "keyword": "Cenario",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "que estou com acesso ao Trello",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.queEstouComAcessoAoTrello()"
+            },
+            "keyword": "Dado "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "solicito para cadastrar um novo card",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.solicitoParaCadastrarUmNovoCard()"
+            },
+            "keyword": "Quando "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "preencho as informações necessárias",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.preenchoAsInformaçõesNecessárias()"
+            },
+            "keyword": "E "
+          },
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "é inserido um novo card ao meu Quadro",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.éInseridoUmNovoCardAoMeuQuadro()"
+            },
+            "keyword": "Então "
+          }
+        ]
+      },
+      {
+        "line": 8,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Contexto",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "que estou acessando a integração com o Trello",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.queEstouAcessandoAIntegraçãoComOTrello()"
+            },
+            "keyword": "Dado "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "informo as informações para autenticação",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.informoAsInformaçõesParaAutenticação()"
+            },
+            "keyword": "Quando "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "devo receber o acesso com a validação do Token para meu usuário",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.devoReceberOAcessoComAValidaçãoDoTokenParaMeuUsuário()"
+            },
+            "keyword": "Então "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-05-25T21:27:55.521Z",
+        "line": 20,
+        "name": "Editar Cards",
+        "description": "",
+        "id": "manipulação-de-cards;editar-cards",
+        "type": "scenario",
+        "keyword": "Cenario",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "que tenho um card cadastrado",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.queTenhoUmCardCadastrado()"
+            },
+            "keyword": "Dado "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "solicito uma alteração",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.solicitoUmaAlteração()"
+            },
+            "keyword": "Quando "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "envio as informações a serem alteradas",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.envioAsInformaçõesASeremAlteradas()"
+            },
+            "keyword": "E "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "é realizada a alteração no card.",
+            "match": {
+              "location": "br.com.luisfellipe.TrelloAPI.Steps.steps.éRealizadaAAlteraçãoNoCard()"
+            },
+            "keyword": "Então "
+          }
+        ]
+      }
+    ],
+    "name": "Manipulação de Cards",
+    "description": "Eu como um usuário do Trello\nQuero realizar o cadastro e edição de Cards \nPara administrar meu tempo e organização de trabalho",
+    "id": "manipulação-de-cards",
+    "keyword": "Funcionalidade",
+    "uri": "file:src/test/resources/TrelloApi.feature",
+    "tags": []
+  }
+]
