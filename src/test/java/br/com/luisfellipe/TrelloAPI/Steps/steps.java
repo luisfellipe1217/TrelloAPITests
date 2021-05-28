@@ -1,69 +1,111 @@
+// Por questões de segurança, devem ser informados indivualmente o Token e a Key da Api para execução dos testes
+
 package br.com.luisfellipe.TrelloAPI.Steps;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
+
+import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
+import io.restassured.RestAssured;
 
 public class steps {
 
-	@Dado("que estou acessando a integração com o Trello")
-	public void queEstouAcessandoAIntegraçãoComOTrello() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	private static String apiToken = ""; //Deve ser informado o Token do usuário trello
+	private static String apiKey = ""; // Deve ser informado a key da api trello
+
+	@Before
+	public static void setup() {
+
+		RestAssured.baseURI = "https://api.trello.com/";
+
 	}
-	@Quando("informo as informações para autenticação")
-	public void informoAsInformaçõesParaAutenticação() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	@Então("devo receber o acesso com a validação do Token para meu usuário")
-	public void devoReceberOAcessoComAValidaçãoDoTokenParaMeuUsuário() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+
 	@Dado("que estou com acesso ao Trello")
 	public void queEstouComAcessoAoTrello() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		given()
+		.when()
+			.get("/1/members/me/boards?key=" + apiKey + "&token=" + apiToken)
+		.then()
+		.statusCode(200);
 	}
+
 	@Quando("solicito para cadastrar um novo card")
-	public void solicitoParaCadastrarUmNovoCard() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	@Quando("preencho as informações necessárias")
-	public void preenchoAsInformaçõesNecessárias() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	@Então("é inserido um novo card ao meu Quadro")
-	public void éInseridoUmNovoCardAoMeuQuadro() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void solicitoParaCadastrarUmNovoCard() {	}
+
+	@Quando("preencho as informações necessárias {string}  {string}  {string}")
+	public void preenchoAsInformaçõesNecessárias(String name, String descricao, String idList) {
+
+		given().log().all().contentType("application/json")
+			.body("{ \"name\" :  \"" + name + "\" , \"desc\": \"" + descricao + "\" , \"idList\": \"" + idList	+ "\"}")
+		.when()
+			.post("1/cards/?key=" + apiKey + "&token=" + apiToken)
+		.then()
+			.statusCode(200)
+			.body("name", is(name));
 	}
 
-	@Dado("que tenho um card cadastrado")
-	public void queTenhoUmCardCadastrado() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@Então("é inserido um novo card ao meu quadro {string} {string} {string}")
+	public void éInseridoUmNovoCardAoMeuQuadro(String name, String descricao, String idList) {
+		given()
+		.when()
+			.get("1/search?key=" + apiKey + "&token=" + apiToken + "&query=" + name)
+		.then()
+			.statusCode(200)
+			.body("cards.name.findAll{it.contains('" + name + "')}", hasItem(name))
+			.body("cards.desc.findAll{it.contains('" + descricao + "')}", hasItem(descricao))
+			.body("cards.idList.findAll{it.contains('" + idList + "')}", hasItem(idList));
 	}
-	@Quando("solicito uma alteração")
-	public void solicitoUmaAlteração() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+
+	@Quando("não preencho as informações obrigatórias")
+	public void nãoPreenchoAsInformaçõesObrigatórias() {
+		given().log().all()
+			.contentType("application/json")
+			.body(("{ \"name\" :  \"\" , \"desc\": \"\" , \"idList\": \"}"))
+		.when()
+				.post("1/cards/?key=" + apiKey + "&token=" + apiToken)
+		.then().statusCode(400);
 	}
+
+	@Então("não deve ser inserido um novo card")
+	public void nãoDeveSerInseridoUmNovoCard() {} //realizado no step acima
+
+	@Dado("que tenho um card cadastrado {string}")
+	public void queTenhoUmCardCadastrado(String idCard) {
+		given()
+		.when()
+			.get("1/cards/" + idCard + "?key=" + apiKey + "&token=" + apiToken)
+		.then()
+			.statusCode(200);
+	}
+
+	@Quando("solicito uma alteração {string} {string} {string}")
+	public void solicitoUmaAlteração(String idCard, String descricao, String name) { {
+			given().log().all().contentType("application/json")
+					.body("{ \"name\" :  \"" + name + "\" , \"desc\": \"" + descricao + "\"}")
+			.when()
+					.put("1/cards/" + idCard + "?key=" + apiKey + "&token=" + apiToken)
+			.then()
+				.statusCode(200)
+			;
+		}
+	}
+
 	@Quando("envio as informações a serem alteradas")
-	public void envioAsInformaçõesASeremAlteradas() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void envioAsInformaçõesASeremAlteradas() {}		
+
+	@Então("é realizada a alteração no card. {string} {string} {string}")
+	public void éRealizadaAAlteraçãoNoCard(String idCard, String descricao, String name) {
+		given()
+		.when()
+			.get("1/cards/" + idCard + "?key=" + apiKey + "&token=" + apiToken)
+		.then()
+			.statusCode(200)
+			.body("cards.name.findAll{it.contains('" + name + "')}", hasItem(name))
+			.body("cards.desc.findAll{it.contains('" + descricao + "')}", hasItem(descricao))
+		;	
 	}
-	@Então("é realizada a alteração no card.")
-	public void éRealizadaAAlteraçãoNoCard() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-
-
-
-	
 }
