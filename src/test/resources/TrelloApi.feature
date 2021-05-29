@@ -13,8 +13,8 @@ E preencho as informações necessárias "<name>"  "<descricao>"  "<idList>"
 Então é inserido um novo card ao meu quadro "<name>" "<descricao>" "<idList>"
 
 Exemplos:
-|   name													| descricao				          																			| 															idList																| 		
-|  		TESTE APITrello			|	Teste de Api para desafio SenseDia				|  	60b129f0081ded8843d961de						|			
+|   name													| descricao				          																			| 															idList															| 		
+|  		TESTE APITrello			|	Teste de Api para desafio SenseDia				|  	60b2cc4fd20353384800e10d					|			
 
 
 Cenario: Não deve adicionar card sem informação
@@ -24,12 +24,16 @@ E não preencho as informações obrigatórias
 Então não deve ser inserido um novo card
 
 Esquema do Cenario: Editar Cards
-Dado que tenho um card cadastrado "<idCard>"
-Quando solicito uma alteração "<idCard>" "<descricao> " "<name>"
+Dado que tenho um card cadastrado 
+Quando solicito uma alteração  "<descricao> " "<name>"
 E envio as informações a serem alteradas 
-Então é realizada a alteração no card."<idCard>" "<descricao> " "<name>"
+Então é realizada a alteração no card. "<descricao> " "<name>"
 
 Exemplos: 
-|idCard                                           |        descricao            |          name                                     | 
-|60b1621e5a04093dc4b345c6|     Teste Sensedia     |       		Alteração PUT											|
+|     descricao          	   |          name                                     | 
+|    Teste Sensedia     |       		Alteração PUT											|
+
+
+
+
 
